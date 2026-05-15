@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Free Fire Donate</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background: radial-gradient(circle at top,#0b0b10,#000);
+  color:white;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.bg {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:
+  radial-gradient(circle at 20% 20%,rgba(255,0,80,0.15),transparent 40%),
+  radial-gradient(circle at 80% 80%,rgba(0,255,255,0.12),transparent 40%);
+  filter:blur(20px);
+}
+
+.card {
+  position:relative;
+  width:340px;
+  padding:20px;
+  border-radius:18px;
+  background:rgba(20,20,30,0.75);
+  backdrop-filter:blur(10px);
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+h1 {
+  color:#00fff2;
+  text-shadow:0 0 10px #00fff2;
+  font-size:20px;
+}
+
+input,select {
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  background:rgba(0,0,0,0.4);
+  color:white;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(45deg,#ff004c,#00fff2);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.rek {
+  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  background:rgba(0,0,0,0.4);
+  text-align:left;
+  font-size:13px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.small {
+  font-size:11px;
+  opacity:0.6;
+  margin-top:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+<h1>🔥 FREE FIRE DONATE</h1>
+
+<input type="text" id="playerId" placeholder="Free Fire ID">
+
+<select id="donate">
+  <option>Нет</option>
+  <option>💎 100 — 150 сом</option>
+  <option>💎 210 — 300 сом</option>
+  <option>💎 530 — 600 сом</option>
+  <option>💎 1080 — 1110 сом</option>
+</select>
+
+<select id="voucher">
+
+  <option>Нет</option>
+  <option>Еженедельный Lite — 78 сом</option>
+  <option>Еженедельное членство — 228 сом</option>
+  <option>Месячная подписка — 1155 сом</option>
+</select>
+
+<div class="rek">
+💳 <b>РЕКВИЗИТЫ</b><br><br>
+🏦 М банк: 500418585<br>
+👤 Байхан А.<br><br>
+💰 O! деньги: 500418585
+</div>
+
+<button onclick="sendTelegram()">ОТПРАВИТЬ ЗАЯВКУ</button>
+
+<div class="small">⚡ заявка приходит в Telegram</div>
+
+</div>
+
+<script>
+
+async function sendTelegram() {
+
+const botToken = "8775103857:AAE49_cnCCzwXzd1Pu2tsJCEPpRjXosEBz8";
+const chatId = "8625533442";
+
+const playerId = document.getElementById("playerId").value;
+const donate = document.getElementById("donate").value;
+const voucher = document.getElementById("voucher").value;
+
+let message = `🔥 НОВАЯ ЗАЯВКА FREE FIRE\n\n🆔 ID: ${playerId}\n`;
+
+if (donate !== "Нет") {
+  message += `💎 Донат: ${donate}\n`;
+}
+
+if (voucher !== "Нет") {
+  message += `🎟 Ваучер: ${voucher}\n`;
+}
+
+const now = new Date();
+message += `\n📅 ${now.toLocaleDateString()}\n⏰ ${now.toLocaleTimeString()}`;
+
+await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+method:"POST",
+headers:{"Content-Type":"application/x-www-form-urlencoded"},
+body:new URLSearchParams({
+chat_id:chatId,
+text:message
+})
+});
+
+alert("Заявка отправлена ✔");
+
+}
+
+</script>
+
+</body>
+</html>
